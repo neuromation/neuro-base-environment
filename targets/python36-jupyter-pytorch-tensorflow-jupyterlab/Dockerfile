@@ -25,16 +25,17 @@ RUN APT_INSTALL="apt-get install -y --no-install-recommends" && \
 # ------------------------------------------------------------------
 
     DEBIAN_FRONTEND=noninteractive $APT_INSTALL \
-        build-essential \
         apt-utils \
+        build-essential \
         ca-certificates \
-        wget \
-        git \
-        vim \
-        libssl-dev \
         curl \
-        unzip \
+        git \
+        libssl-dev \
+        rsync \
         unrar \
+        unzip \
+        vim \
+        wget \
         && \
 
     git clone https://github.com/Kitware/CMake ~/cmake && \
@@ -134,7 +135,7 @@ RUN APT_INSTALL="apt-get install -y --no-install-recommends" && \
         && \
 
 # ==================================================================
-# neuromation 
+# neuromation
 # ------------------------------------------------------------------
 
     $PIP_INSTALL \
@@ -236,6 +237,12 @@ PermitEmptyPasswords yes\n" > /etc/ssh/sshd_config
 # ssh port
 EXPOSE 22
 
+# ==================================================================
+# Documentation notebook
+# ------------------------------------------------------------------
+RUN mkdir -p /var/notebooks
+COPY files/var/notebooks/README.ipynb /var/notebooks
+
 
 # ==================================================================
 # config & cleanup
@@ -251,7 +258,7 @@ EXPOSE 8888 6006
 # Create named pipe for stdout+stderr
 ENV OUTPUT_PIPE "/output"
 
-# Force the stdout and stderr streams to be unbuffered. 
+# Force the stdout and stderr streams to be unbuffered.
 # Needed for correct work of tqdm via 'neuro exec'
 ENV PYTHONUNBUFFERED 1
 

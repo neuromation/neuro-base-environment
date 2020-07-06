@@ -17,7 +17,6 @@ if [ -f "$NM_WANDB_TOKEN_PATH" ]; then
   wandb login "$(cat $NM_WANDB_TOKEN_PATH)"
 fi
 
-
 exec "$@"
 
 } 2>&1 | tee $OUTPUT_PIPE

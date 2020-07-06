@@ -19,7 +19,7 @@ jobs:
             # dependencies for building the image
             apk add --no-cache --no-progress make
             # dependencies for testing pip dependencies (python must support typing)
-            apk add --no-cache --no-progress python3==3.7.5-r1 py-pip git
+            apk add --no-cache --no-progress python3 py-pip git
             # dependencies for testing ssh (grep must have -P option)
             apk add --no-cache --no-progress grep==3.3-r0 openssh-client==8.1_p1-r0
             # dependencies for testing gcloud: pip-package 'fernet' needs it
